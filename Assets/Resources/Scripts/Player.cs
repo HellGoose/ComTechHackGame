@@ -14,9 +14,13 @@ public class Player {
     }
 
     public void changeName(string name) { this.name = name; }
+    public string getName() { return name; }
 
-    public void addItem(Object item){ inventory.Add(item); }
-    public bool removeItem(Object item){ return inventory.Remove(item); }
+    public void addItem(Object item) { inventory.Add(item); }
+    public bool removeItem(Object item) { return inventory.Remove(item); }
+    public List<Object> getInventory() { return inventory; }
+    //The null should be change to new whateverClass() with out of bounds info, for less frustration :)
+    public Object getItemAt(int i) { return i < inventory.Count ? inventory[i] : null; }
 
     
 }
