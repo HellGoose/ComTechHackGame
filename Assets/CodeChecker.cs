@@ -8,8 +8,14 @@ public class CodeChecker : MonoBehaviour {
     public Text text;
     public InputField input;
     public string[] textLines;
-	// Use this for initialization
-	void Start () {
+    private char[] stringTochar;
+    private int leftCurly;
+    private int rightCurly;
+    private int leftParentc;
+    private int rightParentc;
+    private List<string> Errors;
+    // Use this for initialization
+    void Start () {
         Debug.Log("start");
         if (defaultText != null)
         {
@@ -25,23 +31,35 @@ public class CodeChecker : MonoBehaviour {
     public void updateStringArray()
     {
         textLines = input.text.Split('\n');
+        stringTochar = input.text.ToCharArray();
     }
     public bool chechMainSyntaxt()
     {
-        for (int i = 0; i < textLines.Length; i++)
+        checkLeftCurly();
+        checkRightCurly();
+        checkLeftParentc();
+        checkRightParentc();
+        if (rightParentc != leftParentc || rightCurly != leftCurly)
         {
-            textLines[i].Trim();
-            textLines[i].ToLower();
+            Debug.Log("Compiler issue");
+            resetValues();
+            return false;
         }
-        if (textLines[0] == "Function createModule(){".Trim().ToLower() && textLines[textLines.Length - 1] == "}".Trim().ToLower())
-        {
-            Debug.Log("Syntax True");
-            return true;
-        }
-        Debug.Log("syntax False");
-        Debug.Log(textLines[0] + "\n" + textLines[textLines.Length - 1]);
-        return false;
+        Debug.Log(leftCurly);
+        resetValues();
+        return true;
 
+    }
+    public void setErrors()
+    {
+        if (rightCurly != leftCurly)
+        {
+            Errors.Add("Mismatched Brackets");
+        }
+        if (rightParentc != leftParentc)
+        {
+            Errors.Add("Mismatched Parentheses");
+        }
     }
     public void resetText()
     {
@@ -54,4 +72,56 @@ public class CodeChecker : MonoBehaviour {
             Debug.Log("It worked");
         }
     }
+    public void checkLeftCurly()
+    {
+        for(int i = 0; i < stringTochar.Length; i++)
+        {
+            if (stringTochar[i]=='{')
+            {
+                leftCurly++;
+            }
+        }
+       
+    }
+    public void checkRightCurly()
+    {
+        for (int i = 0; i < stringTochar.Length; i++)
+        {
+            if (stringTochar[i] == '}')
+            {
+                rightCurly++;
+            }
+        }
+
+    }
+    public void checkLeftParentc()
+    {
+        for (int i = 0; i < stringTochar.Length; i++)
+        {
+            if (stringTochar[i] == '(')
+            {
+                leftParentc++;
+            }
+        }
+
+    }
+    public void checkRightParentc()
+    {
+        for (int i = 0; i < stringTochar.Length; i++)
+        {
+            if (stringTochar[i] == ')')
+            {
+                rightParentc++;
+            }
+        }
+
+    }
+    public void resetValues()
+    {
+        leftCurly = 0;
+        rightCurly = 0;
+        leftParentc = 0;
+        rightParentc = 0;
+    }
+    
 }
