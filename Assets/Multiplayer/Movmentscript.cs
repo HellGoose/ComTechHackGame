@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class Movmentscript : MonoBehaviour {
+public class Movmentscript : NetworkBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -12,8 +13,13 @@ public class Movmentscript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        
+        // Makes sure that you are not trying to control other players
+        if(!isLocalPlayer)
+        {
+            return;
+        }
 
+        // simple mouse controlls 
         float x = 0.0f;
         float y = 0.0f;
         float speed = 0.1f;
