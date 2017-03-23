@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Jurassic;
+using Jurassic.Library;
 
 public class CodeChecker : MonoBehaviour {
     public TextAsset defaultText;
