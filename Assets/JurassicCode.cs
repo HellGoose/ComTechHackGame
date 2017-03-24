@@ -29,9 +29,9 @@ public class JurassicCode : MonoBehaviour {
     {
         engine = new ScriptEngine();
         engine.EnableExposedClrTypes = true;
-        engine.SetGlobalValue("console", new Jurassic.Library.FirebugConsole(engine));
+        //engine.SetGlobalValue("console", new Jurassic.Library.FirebugConsole(engine));
         engine.SetGlobalFunction("test", new System.Func<string>(jsTest));
-        //engine.SetGlobalFunction("console", new System.Action<string>(doStuff));
+        engine.SetGlobalFunction("consoleLog", new System.Action<System.Object>(consoleLog));
     }
    
     public string jsTest()
@@ -58,6 +58,12 @@ public class JurassicCode : MonoBehaviour {
         Debug.Log("IT IS working");
        
       
+    }
+    private void consoleLog(System.Object obj)
+    {
+      
+        tempConsole(obj.ToString());
+        writeToConsole();
     }
 
 
