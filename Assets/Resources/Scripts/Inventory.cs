@@ -12,10 +12,15 @@ public class Inventory : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+        drawItems();
 	}
+
+    private void drawItems()
+    {
+
+    }
 
     public void addItem(InventoryItem item) { inventory.Add(item); }
     public bool removeItem(InventoryItem item) { return inventory.Remove(item); }
-    public InventoryItem getItemAt(int i) { return i < inventory.Count ? inventory[i] : new InventoryItem(); }
+    public InventoryItem getItemAt(int i) { return i < inventory.Count ? inventory[i] : null; }
 }
