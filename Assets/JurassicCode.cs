@@ -29,7 +29,7 @@ public class JurassicCode : MonoBehaviour {
     {
         engine = new ScriptEngine();
         engine.EnableExposedClrTypes = true;
-        //engine.SetGlobalValue("console", new Jurassic.Library.FirebugConsole(engine));
+        //engine.SetGlobalValue("console", new hackConsole(engine));
         engine.SetGlobalFunction("test", new System.Func<string>(jsTest));
         engine.SetGlobalFunction("consoleLog", new System.Action<System.Object>(consoleLog));
     }
@@ -67,11 +67,11 @@ public class JurassicCode : MonoBehaviour {
     }
 
 
-    private void tempConsole(string log)
+    public  void tempConsole(string log)
     {
         tempConsoleText = log+"\n";
     }
-    private void writeToConsole()
+    public void writeToConsole()
     {
         fullConsoleText += tempConsoleText;
         console.text = fullConsoleText;
@@ -86,3 +86,4 @@ public class JurassicCode : MonoBehaviour {
         ConsoleContent.sizeDelta = new Vector2(458, 250);
     }
 }
+
