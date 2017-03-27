@@ -9,7 +9,6 @@ public class PlayerUI : MonoBehaviour {
 	public static float x = -5;
 	public static float y = 0;
 	public Vector3 position = new Vector3(x, y, 0);
-	public static bool locked;
 
 	// Use this for initialization
 	void Start () {
@@ -19,14 +18,13 @@ public class PlayerUI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKeyDown (KeyCode.RightArrow) && (x <= 0)) {
+		if (!NodeUI.locked && (Input.GetKeyDown (KeyCode.RightArrow)) && (x <= 0)) {
 			x += 5;
 			transform.position = new Vector3(x, y, 0);
 		}
-		if (Input.GetKeyDown (KeyCode.LeftArrow) && (x >= 0)) {
+		if (!NodeUI.locked && (Input.GetKeyDown (KeyCode.LeftArrow)) && (x >= 0)) {
 			x -= 5;
 			transform.position = new Vector3(x, y, 0);
 		}
-
-
+	}
 }
