@@ -15,8 +15,9 @@ public class JurassicCode : MonoBehaviour {
     public Text console;
     public RectTransform ConsoleContent;
     public RectTransform InputContent;
-    public Text[] helpText;
-
+    public TextAsset [] helpText;
+    public Text helperText;
+    public GameObject helpBox;
     // Use this for initialization
     void Start () {
 		
@@ -28,6 +29,7 @@ public class JurassicCode : MonoBehaviour {
 	}
     void Awake()
     {
+        helpBox.SetActive(false);
         engine = new ScriptEngine();
         engine.EnableExposedClrTypes = true;
         engine.SetGlobalFunction("consoleLog", new System.Action<System.Object>(consoleLog));
@@ -36,7 +38,18 @@ public class JurassicCode : MonoBehaviour {
    
     public void help()
     {
-        
+        int index=new System.Random().Next(0, helpText.Length);
+        displayhelp(index);
+    }
+    public void displayhelp(int index)
+    {
+        helperText.text = helpText[index].text;
+        helpBox.SetActive(true);
+
+    }
+    public void dismissHelp()
+    {
+        helpBox.SetActive(false);
     }
 
     private void doStuff()
