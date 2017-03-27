@@ -15,6 +15,7 @@ public class JurassicCode : MonoBehaviour {
     public Text console;
     public RectTransform ConsoleContent;
     public RectTransform InputContent;
+    public Text[] helpText;
 
     // Use this for initialization
     void Start () {
@@ -29,18 +30,21 @@ public class JurassicCode : MonoBehaviour {
     {
         engine = new ScriptEngine();
         engine.EnableExposedClrTypes = true;
-        //engine.SetGlobalValue("console", new hackConsole(engine));
-        engine.SetGlobalFunction("test", new System.Func<string>(jsTest));
         engine.SetGlobalFunction("consoleLog", new System.Action<System.Object>(consoleLog));
+        engine.SetGlobalFunction("helpUsObi1", new System.Action(help));
     }
    
-    public string jsTest()
+    public void help()
     {
-        doStuff();
-        return "";
+        
     }
-  
-    
+
+    private void doStuff()
+    {
+        Debug.Log("IT IS working");
+
+
+    }
     public void runJS()
     {
         codetext = input.text;
@@ -53,20 +57,12 @@ public class JurassicCode : MonoBehaviour {
         }
         
     }
-    private void doStuff()
-    {
-        Debug.Log("IT IS working");
-       
-      
-    }
     private void consoleLog(System.Object obj)
     {
       
         tempConsole(obj.ToString());
         writeToConsole();
     }
-
-
     public  void tempConsole(string log)
     {
         tempConsoleText = log+"\n";
