@@ -5,6 +5,12 @@ using UnityEngine;
 public class Player {
     private string name;
     private List<Object> inventory;
+    public static int currentNode;
+
+    void Start()
+    {
+        currentNode = 01;
+    }
 
     //Model for the player. Add stuff as you need it :)
     public Player(string name)
