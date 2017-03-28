@@ -5,8 +5,9 @@ using UnityEngine.UI;
 
 public class PlayerUI : MonoBehaviour {
 
-	//static Sprite player;
     public static int currentNode;
+    public static int currentModule;
+    public static bool open = false;
     public static Color color;
     public int player;
 
@@ -34,11 +35,30 @@ public class PlayerUI : MonoBehaviour {
             color = Color.yellow;
         }
 
+        open = false;
+
 
     }
 	
 	// Update is called once per frame
 	void Update () {
 
-	}
+        if (currentNode < 10)
+        {
+            currentModule = 1;
+        }
+        else if (currentNode < 20)
+        {
+            currentModule = 2;
+        }
+        else
+        {
+            currentModule = 3;
+        }
+
+
+    }
+
+
+
 }

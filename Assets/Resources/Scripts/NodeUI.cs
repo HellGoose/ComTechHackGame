@@ -4,25 +4,32 @@ using UnityEngine;
 
 public class NodeUI : MonoBehaviour {
 
-	public static GameObject nodeLock;
-	public static bool locked;
-	public static bool key;
+    public static int currentModule;
+    
 
 	// Use this for initialization
 	void Start () {
-		nodeLock = GameObject.FindGameObjectWithTag("Lock0");
-		key = true;
-		locked = true;
+        if (PlayerUI.currentNode < 10)
+        {
+            currentModule = 0;
+        }
+        else if (PlayerUI.currentNode < 20)
+        {
+            currentModule = 1;
+        }
+        else
+        {
+            currentModule = 2;
+        }
 		
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-		if (Input.GetKey (KeyCode.K) && (key == true)) {
-			nodeLock.SetActive (false);
-			locked = false;
-		}
+
+
+
 		
 		
 	}
