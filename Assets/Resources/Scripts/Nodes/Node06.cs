@@ -49,7 +49,8 @@ public class Node06 : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if ((PlayerUI.currentNode == 01 && !Node01.locked) || (PlayerUI.currentNode == 11 && !Node11.locked) || (PlayerUI.currentNode == 12 && !Node12.locked))
+        // if (!locked || (PlayerUI.currentNode == 01 && !Node01.locked) || (PlayerUI.currentNode == 11 && !Node11.locked) || (PlayerUI.currentNode == 12 && !Node12.locked))
+        if (!locked || !Node01.locked || !Node11.locked || !Node12.locked)
         {
             PlayerUI.currentNode = 06;
             PlayerUI.open = false;
