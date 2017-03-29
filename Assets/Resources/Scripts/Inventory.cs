@@ -1,26 +1,44 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class Inventory : MonoBehaviour {
-    private List<InventoryItem> inventory;
+    private Module[] modules = new Module[numberOfItemSlots];
+    private GameObject[] itemSlots = new GameObject[numberOfItemSlots];
+    private const int numberOfItemSlots = 6;
 
-	// Use this for initialization
-	void Start () {
-        inventory = new List<InventoryItem>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        drawItems();
-	}
-
-    private void drawItems()
+    // Use this for initialization
+    void Start()
     {
-
+        itemSlots = GameObject.FindGameObjectsWithTag("ItemSlot");
     }
 
-    public void addItem(InventoryItem item) { inventory.Add(item); }
-    public bool removeItem(InventoryItem item) { return inventory.Remove(item); }
-    public InventoryItem getItemAt(int i) { return i < inventory.Count ? inventory[i] : null; }
+    public void addItem(Module module) {
+        for (int i = 0; i < modules.Length; i++)
+        {
+            if (modules[i] == null)
+            {
+                modules[i] = module;
+                itemSlots[i].GetComponents<Text>()[0].text = module.getName();
+                itemSlots[i].GetComponents<Text>()[0].text = module.getName();
+                return;
+            }
+        }
+    }
+
+    public void removeItem(Module module)
+    {
+        for (int i = 0; i < modules.Length; i++)
+        {
+            if (modules[i] == module)
+            {
+                modules[i] = null;
+                itemSlots[i].GetComponents<Text>()[0].text = "";
+                itemSlots[i].GetComponents<Text>()[0].text = "";
+                return;
+            }
+        }
+    }
 }
