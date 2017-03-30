@@ -13,8 +13,6 @@ public class Inventory : MonoBehaviour {
     void Start()
     {
         itemSlots = GameObject.FindGameObjectsWithTag("ItemSlot");
-        addItem(new Decrypt(1));
-        addItem(new Encrypt(2));
     }
 
     public void addItem(Module module) {
@@ -23,8 +21,7 @@ public class Inventory : MonoBehaviour {
             if (modules[i] == null)
             {
                 modules[i] = module;
-                itemSlots[numberOfItemSlots - i - 1].GetComponentsInChildren<Text>()[0].text = module.getName();
-                itemSlots[numberOfItemSlots - i - 1].GetComponentsInChildren<Text>()[1].text = module.getLevel().ToString();
+                itemSlots[numberOfItemSlots - i - 1].GetComponent<InventorySlot>().setItem(module);
                 return;
             }
         }
@@ -37,8 +34,7 @@ public class Inventory : MonoBehaviour {
             if (modules[i] == module)
             {
                 modules[i] = null;
-                itemSlots[i].GetComponents<Text>()[0].text = "";
-                itemSlots[i].GetComponents<Text>()[0].text = "";
+                itemSlots[numberOfItemSlots - i - 1].GetComponent<InventorySlot>().setItem(null);
                 return;
             }
         }
