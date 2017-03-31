@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class UIController : MonoBehaviour {
@@ -24,5 +25,10 @@ public class UIController : MonoBehaviour {
         {
             PlayerUI.open = true;
         }
+    }
+
+    public void LoadLevel(string level)
+    {
+        SceneManager.LoadScene(level);
     }
 }
