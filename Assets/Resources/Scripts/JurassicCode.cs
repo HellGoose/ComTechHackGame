@@ -18,10 +18,11 @@ public class JurassicCode : MonoBehaviour {
     public TextAsset [] helpText;
     public Text helperText;
     public GameObject helpBox;
+    private Inventory inventory;
     // Use this for initialization
     void Start () {
-		
-	}
+        inventory = GameObject.Find("CodeWriter/Canvas/inventory").GetComponent<Inventory>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -34,6 +35,8 @@ public class JurassicCode : MonoBehaviour {
         engine.EnableExposedClrTypes = true;
         engine.SetGlobalFunction("consoleLog", new System.Action<System.Object>(consoleLog));
         engine.SetGlobalFunction("helpUsObi1", new System.Action(help));
+        engine.SetGlobalFunction("decrypt", new System.Action<int>(addDecrypt));
+        engine.SetGlobalFunction("encrypt", new System.Action<int>(addEncrypt));
     }
    
     public void help()
@@ -50,13 +53,6 @@ public class JurassicCode : MonoBehaviour {
     public void dismissHelp()
     {
         helpBox.SetActive(false);
-    }
-
-    private void doStuff()
-    {
-        Debug.Log("IT IS working");
-
-
     }
     public void runJS()
     {
@@ -93,6 +89,21 @@ public class JurassicCode : MonoBehaviour {
         fullConsoleText = "";
         console.text = "";
         ConsoleContent.sizeDelta = new Vector2(458, 250);
+    }
+    public void resetInputfield()
+    {
+        input.text = "";
+    }
+
+    public void addDecrypt(int lvl)
+    {
+       
+        inventory.addItem(new Decrypt(lvl));
+    }
+    public void addEncrypt(int lvl)
+    {
+
+        inventory.addItem(new Encrypt(lvl));
     }
 }
 
