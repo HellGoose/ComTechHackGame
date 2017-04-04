@@ -6,6 +6,7 @@ public class Node09 : Node
 {
     private int thisNode = 9;
     private bool thisLock;
+    private bool thisHack;
     private int thisLevel = 2;
 
     // Use this for initialization
@@ -18,23 +19,35 @@ public class Node09 : Node
         {
             Locks.Add(thisNode, true);
         }
+        if (!Hacks.ContainsKey(thisNode))
+        {
+            Hacks.Add(thisNode, false);
+        }
+
     }
 
     // Update is called once per frame
     void Update()
     {
         thisLock = Locks[thisNode];
+        thisHack = Hacks[thisNode];
 
         nodeLock = GameObject.FindGameObjectWithTag(lockRen);
         node = GameObject.FindGameObjectWithTag(nodeRen);
 
-        if (thisLock == false)
+
+
+        if (thisLock)
+        {
+            nodeLock.GetComponent<Renderer>().material.color = Color.white;
+        }
+        else if (!thisLock && !thisHack)
         {
             nodeLock.GetComponent<Renderer>().material.color = Color.cyan;
         }
-        else
+        else if (!thisLock && thisHack)
         {
-            nodeLock.GetComponent<Renderer>().material.color = Color.white;
+            nodeLock.GetComponent<Renderer>().material.color = Color.grey;
         }
 
         if (currentNode != thisNode)
@@ -46,7 +59,8 @@ public class Node09 : Node
 
     private void OnMouseDown()
     {
-        if (!thisLock || (currentNode == 4 && !Locks[4]) || (currentNode == 5 && !Locks[5]) || (currentNode == 8 && !Locks[8]) || (currentNode == 13 && !Locks[13]) || (currentNode == 15 && !Locks[15]))
+        //if (!thisLock || (currentNode == 4 && !Locks[4]) || (currentNode == 5 && !Locks[5]) || (currentNode == 8 && !Locks[8]) || (currentNode == 13 && !Locks[13]) || (currentNode == 15 && !Locks[15]))
+        if ((currentNode == 4 && (!thisLock || !Locks[4])) || (currentNode == 5 && (!thisLock || !Locks[5])) || (currentNode == 8 && (!thisLock || !Locks[8])) || (currentNode == 13 && (!thisLock || !Locks[13])) || (currentNode == 15 && (!thisLock || !Locks[15])))
         {
             currentNode = thisNode;
         }

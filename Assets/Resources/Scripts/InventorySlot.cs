@@ -39,7 +39,10 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public void OnEndDrag(PointerEventData eventData)
     {
         transform.position = startPostition;
-        useItem();
+        if (Node.currentModule == Node.currentNode)
+        {
+            useItem();
+        }
     }
 
     
@@ -59,7 +62,7 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         {
             if (Node.currentLevel.ToString().Equals(moduleLevel.text))
             {
-                Node.Locks[Node.currentModule] = true;
+                Node.Hacks[Node.currentModule] = true;
                 inventory.removeItem(module);
             }
         }

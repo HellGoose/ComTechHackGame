@@ -7,6 +7,7 @@ public class Node24 : Node
 
     private int thisNode = 24;
     private bool thisLock;
+    private bool thisHack;
     private int thisLevel = 2;
 
     // Use this for initialization
@@ -19,23 +20,36 @@ public class Node24 : Node
         {
             Locks.Add(thisNode, true);
         }
+
+        if (!Hacks.ContainsKey(thisNode))
+        {
+            Hacks.Add(thisNode, false);
+        }
+
     }
 
     // Update is called once per frame
     void Update()
     {
         thisLock = Locks[thisNode];
+        thisHack = Hacks[thisNode];
 
         nodeLock = GameObject.FindGameObjectWithTag(lockRen);
         node = GameObject.FindGameObjectWithTag(nodeRen);
 
-        if (thisLock == false)
+
+
+        if (thisLock)
+        {
+            nodeLock.GetComponent<Renderer>().material.color = Color.white;
+        }
+        else if (!thisLock && !thisHack)
         {
             nodeLock.GetComponent<Renderer>().material.color = Color.cyan;
         }
-        else
+        else if (!thisLock && thisHack)
         {
-            nodeLock.GetComponent<Renderer>().material.color = Color.white;
+            nodeLock.GetComponent<Renderer>().material.color = Color.grey;
         }
 
         if (currentNode != thisNode)
@@ -47,7 +61,8 @@ public class Node24 : Node
 
     private void OnMouseDown()
     {
-        if (!thisLock || (currentNode == 19 && !Locks[19]) || (currentNode == 23 && !Locks[23]) || (currentNode == 25 && !Locks[25]))
+        //if (!thisLock || (currentNode == 19 && !Locks[19]) || (currentNode == 23 && !Locks[23]) || (currentNode == 25 && !Locks[25]))
+        if ((currentNode == 19 && (!thisLock || !Locks[19])) || (currentNode == 23 && (!thisLock || !Locks[23])) || (currentNode == 25 && (!thisLock || !Locks[25])))
         {
             currentNode = thisNode;
         }

@@ -13,6 +13,7 @@ public class Node : MonoBehaviour {
     public static int currentLevel;
     public static int currentModule;
     public static Dictionary<int, bool> Locks = new Dictionary<int, bool>();
+    public static Dictionary<int, bool> Hacks = new Dictionary<int, bool>();
 
 
 
@@ -25,7 +26,6 @@ public class Node : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
 
 
     }
