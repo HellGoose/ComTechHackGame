@@ -27,6 +27,11 @@ public class UIController : MonoBehaviour {
         }
     }
 
+    public void Lock()
+    {
+        PlayerUI.open = false;
+    }
+
     public void LoadLevel(string level)
     {
         SceneManager.LoadScene(level);
