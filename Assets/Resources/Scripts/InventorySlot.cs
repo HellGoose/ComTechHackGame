@@ -10,6 +10,8 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler {
     private Text moduleLevel;
     private Module module;
     public static Inventory inventory;
+    private int lastLevel;
+    private int lastNode;
 
     // Use this for initialization
     void Start () {
@@ -27,28 +29,26 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler {
     public void OnPointerClick(PointerEventData eventData)
     {
         useItem();
-        // test funcionality. Should only remove an item.
-        //if (module == null) { inventory.addItem(new Decrypt(1)); }
-        //else {
-        //inventory.removeItem(module); //}
     }
 
     private void useItem()
     {
-        if (Node.Locks[Node.currentNode]) //&& moduleName.Equals("decrypt()"))
+        if ((Node.Locks[Node.currentNode]) && (moduleName.text.Equals("decrypt()")))
         {
-            if (Node.currentLevel == 1) //.ToString().Equals(moduleLevel))
+            if (Node.currentLevel.ToString().Equals(moduleLevel.text))
             {
+                lastNode = Node.currentNode;
+                lastLevel = Node.currentLevel;
                 Node.Locks[Node.currentNode] = false;
                 inventory.removeItem(module);
             }
 
         }
-        else if (!Node.Locks[Node.currentNode]) // && moduleName.Equals("encrypt()"))
+        else if (!Node.Locks[lastNode] && moduleName.text.Equals("encrypt()"))
         {
-            if (Node.currentLevel == 1) //.ToString().Equals(moduleLevel))
+            if (lastLevel.ToString().Equals(moduleLevel.text))
             {
-                Node.Locks[Node.currentNode] = true;
+                Node.Locks[lastNode] = true;
                 inventory.removeItem(module);
             }
         }

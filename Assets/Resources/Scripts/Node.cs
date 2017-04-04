@@ -17,7 +17,6 @@ public class Node : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-
         currentLevel = 1;
 
 

@@ -28,6 +28,17 @@ public class UIController : MonoBehaviour {
         InventorySlot.inventory.addItem(new Encrypt(1));
     }
 
+    public void Unlock2()
+    {
+
+        InventorySlot.inventory.addItem(new Decrypt(2));
+    }
+
+    public void Lock2()
+    {
+        InventorySlot.inventory.addItem(new Encrypt(2));
+    }
+
     public void LoadLevel(string level)
     {
         SceneManager.LoadScene(level);
