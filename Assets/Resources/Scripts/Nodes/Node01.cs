@@ -6,6 +6,7 @@ public class Node01 : Node {
 
     private int thisNode = 1;
     private bool thisLock;
+    private int thisLevel = 1;
 
     // Use this for initialization
     void Start ()
@@ -17,6 +18,7 @@ public class Node01 : Node {
         {
             Locks.Add(thisNode, true);
         }
+
     }
 
     // Update is called once per frame
@@ -27,7 +29,7 @@ public class Node01 : Node {
         nodeLock = GameObject.FindGameObjectWithTag(lockRen);
         node = GameObject.FindGameObjectWithTag(nodeRen);
 
-        node.GetComponent<Renderer>().material.color = Color.black;
+        
 
         if (thisLock == false)
         {
@@ -38,11 +40,7 @@ public class Node01 : Node {
             nodeLock.GetComponent<Renderer>().material.color = Color.white;
         }
 
-        if (currentNode == thisNode)
-        {
-            node.GetComponent<Renderer>().material.color = PlayerUI.color;
-        }
-        else
+        if (currentNode != thisNode)
         {
             node.GetComponent<Renderer>().material.color = Color.black;
         }
@@ -53,6 +51,7 @@ public class Node01 : Node {
         if (!thisLock || (currentNode == 2 && !Locks[2]) || (currentNode == 6 && !Locks[6]))
         {
             currentNode = thisNode;
+            currentLevel = thisLevel;
 
         }
     }

@@ -9,6 +9,9 @@ public class PlayerUI : MonoBehaviour {
     public static int currentModule;
     public static Color color;
     public static int player;
+    private string playerNode;
+    private GameObject node;
+
 
     // Use this for initialization
     void Start () {
@@ -36,24 +39,18 @@ public class PlayerUI : MonoBehaviour {
             color = Color.yellow;
         }
 
+        
+
     }
 	
 	// Update is called once per frame
 	void Update () {
 
-        if (Node.currentNode < 10)
-        {
-            currentModule = 1;
-        }
-        else if (Node.currentNode < 20)
-        {
-            currentModule = 2;
-        }
-        else
-        {
-            currentModule = 3;
-        }
+        playerNode = "Node" + Node.currentNode.ToString();
 
+        node = GameObject.FindGameObjectWithTag(playerNode);
+
+        node.GetComponent<Renderer>().material.color = color;
 
     }
 

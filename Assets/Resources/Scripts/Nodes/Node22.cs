@@ -28,8 +28,6 @@ public class Node22 : Node
         nodeLock = GameObject.FindGameObjectWithTag(lockRen);
         node = GameObject.FindGameObjectWithTag(nodeRen);
 
-        node.GetComponent<Renderer>().material.color = Color.black;
-
         if (thisLock == false)
         {
             nodeLock.GetComponent<Renderer>().material.color = Color.cyan;
@@ -39,11 +37,7 @@ public class Node22 : Node
             nodeLock.GetComponent<Renderer>().material.color = Color.white;
         }
 
-        if (currentNode == thisNode)
-        {
-            node.GetComponent<Renderer>().material.color = PlayerUI.color;
-        }
-        else
+        if (currentNode != thisNode)
         {
             node.GetComponent<Renderer>().material.color = Color.black;
         }

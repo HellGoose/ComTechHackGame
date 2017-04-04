@@ -19,13 +19,13 @@ public class UIController : MonoBehaviour {
 
     public void Unlock()
     {
-        
-        Node.Locks[currentLock] = false;
+
+        InventorySlot.inventory.addItem(new Decrypt(1));
     }
 
     public void Lock()
     {
-        Node.Locks[currentLock] = true;
+        InventorySlot.inventory.addItem(new Encrypt(1));
     }
 
     public void LoadLevel(string level)

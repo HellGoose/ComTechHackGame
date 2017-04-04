@@ -7,6 +7,8 @@ public class Node12 : Node
 
     private int thisNode = 12;
     private bool thisLock;
+    private int thisLevel = 3;
+
 
     // Use this for initialization
     void Start()
@@ -28,8 +30,6 @@ public class Node12 : Node
         nodeLock = GameObject.FindGameObjectWithTag(lockRen);
         node = GameObject.FindGameObjectWithTag(nodeRen);
 
-        node.GetComponent<Renderer>().material.color = Color.black;
-
         if (thisLock == false)
         {
             nodeLock.GetComponent<Renderer>().material.color = Color.cyan;
@@ -39,11 +39,7 @@ public class Node12 : Node
             nodeLock.GetComponent<Renderer>().material.color = Color.white;
         }
 
-        if (currentNode == thisNode)
-        {
-            node.GetComponent<Renderer>().material.color = PlayerUI.color;
-        }
-        else
+        if (currentNode != thisNode)
         {
             node.GetComponent<Renderer>().material.color = Color.black;
         }
@@ -55,6 +51,7 @@ public class Node12 : Node
         if (!thisLock || (currentNode == 2 && !Locks[2]) || (currentNode == 6 && !Locks[6]) || (currentNode == 8 && !Locks[8]) || (currentNode == 11 && !Locks[11]) || (currentNode == 17 && !Locks[17]))
         {
             currentNode = thisNode;
+            currentLevel = thisLevel;
         }
     }
 }
