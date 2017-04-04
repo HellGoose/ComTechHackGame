@@ -5,8 +5,8 @@ using UnityEngine;
 public class Node20 : Node
 {
 
-    public static bool locked;
     private int thisNode = 20;
+    private bool thisLock;
 
     // Use this for initialization
     void Start()
@@ -14,28 +14,23 @@ public class Node20 : Node
         nodeRen = "Node" + thisNode.ToString();
         lockRen = "Lock" + thisNode.ToString();
 
-
-        locked = true;
+        if (!Locks.ContainsKey(thisNode))
+        {
+            Locks.Add(thisNode, true);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        thisLock = Locks[thisNode];
+
         nodeLock = GameObject.FindGameObjectWithTag(lockRen);
         node = GameObject.FindGameObjectWithTag(nodeRen);
 
         node.GetComponent<Renderer>().material.color = Color.black;
 
-        if (currentNode == thisNode && PlayerUI.open)
-        {
-            locked = false;
-        }
-        else
-        {
-            locked = true;
-        }
-
-        if (locked == false)
+        if (thisLock == false)
         {
             nodeLock.GetComponent<Renderer>().material.color = Color.cyan;
         }
@@ -46,7 +41,7 @@ public class Node20 : Node
 
         if (currentNode == thisNode)
         {
-            node.GetComponent<Renderer>().material.color = Color.red;
+            node.GetComponent<Renderer>().material.color = PlayerUI.color;
         }
         else
         {
@@ -57,11 +52,9 @@ public class Node20 : Node
 
     private void OnMouseDown()
     {
-        if (!locked || (currentNode == 15 && !Node15.locked) || (currentNode == 19 && !Node19.locked) || (currentNode == 25 && !Node25.locked))
-        //if (!locked ||!Node15.locked ||!Node19.locked || !Node25.locked)
+        if (!thisLock || (currentNode == 15 && !Locks[15]) || (currentNode == 19 && !Locks[19]) || (currentNode == 25 && !Locks[25]))
         {
             currentNode = thisNode;
-            PlayerUI.open = false;
         }
     }
 }

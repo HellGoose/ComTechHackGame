@@ -7,7 +7,6 @@ public class PlayerUI : MonoBehaviour {
 
 //    public static int currentNode;
     public static int currentModule;
-    public static bool open;
     public static Color color;
     public static int player;
 
@@ -36,9 +35,6 @@ public class PlayerUI : MonoBehaviour {
             Node.currentNode = 25;
             color = Color.yellow;
         }
-
-        open = false;
-
 
     }
 	

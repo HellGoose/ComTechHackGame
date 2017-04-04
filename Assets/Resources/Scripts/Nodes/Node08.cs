@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class Node08 : Node
 {
-
-    public static bool locked;
     private int thisNode = 8;
+    private bool thisLock;
 
     // Use this for initialization
     void Start()
@@ -14,28 +13,23 @@ public class Node08 : Node
         nodeRen = "Node" + thisNode.ToString();
         lockRen = "Lock" + thisNode.ToString();
 
-
-        locked = true;
+        if (!Locks.ContainsKey(thisNode))
+        {
+            Locks.Add(thisNode, true);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        thisLock = Locks[thisNode];
+
         nodeLock = GameObject.FindGameObjectWithTag(lockRen);
         node = GameObject.FindGameObjectWithTag(nodeRen);
 
         node.GetComponent<Renderer>().material.color = Color.black;
 
-        if (currentNode == thisNode && PlayerUI.open)
-        {
-            locked = false;
-        }
-        else
-        {
-            locked = true;
-        }
-
-        if (locked == false)
+        if (thisLock == false)
         {
             nodeLock.GetComponent<Renderer>().material.color = Color.cyan;
         }
@@ -46,7 +40,7 @@ public class Node08 : Node
 
         if (currentNode == thisNode)
         {
-            node.GetComponent<Renderer>().material.color = Color.red;
+            node.GetComponent<Renderer>().material.color = PlayerUI.color;
         }
         else
         {
@@ -57,11 +51,9 @@ public class Node08 : Node
 
     private void OnMouseDown()
     {
-        if (!locked || (currentNode == 02 && !Node02.locked) || (currentNode == 04 && !Node04.locked) || (currentNode == 09 && !Node09.locked) || (currentNode == 12 && !Node12.locked) || (currentNode == 13 && !Node13.locked))
-        //if (!locked || !Node02.locked || !Node04.locked || !Node09.locked || !Node12.locked || !Node13.locked)
+        if (!thisLock || (currentNode == 2 && !Locks[2]) || (currentNode == 4 && !Locks[4]) || (currentNode == 9 && !Locks[9]) || (currentNode == 12 && !Locks[12]) || (currentNode == 13 && !Locks[13]))
         {
             currentNode = thisNode;
-            PlayerUI.open = false;
         }
     }
 }

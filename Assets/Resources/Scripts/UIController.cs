@@ -5,9 +5,7 @@ using UnityEngine;
 
 public class UIController : MonoBehaviour {
 
-    public bool key1;
-    public bool key2;
-    public bool key3;
+    private int currentLock;
 
     // Use this for initialization
     void Start () {
@@ -16,20 +14,18 @@ public class UIController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+        currentLock = Node.currentNode;
+    }
 
     public void Unlock()
     {
-        if ((PlayerUI.currentModule == 1 && key1) || (PlayerUI.currentModule == 2 && key2) || (PlayerUI.currentModule == 3 && key3))
-        {
-            PlayerUI.open = true;
-        }
+        
+        Node.Locks[currentLock] = false;
     }
 
     public void Lock()
     {
-        PlayerUI.open = false;
+        Node.Locks[currentLock] = true;
     }
 
     public void LoadLevel(string level)
