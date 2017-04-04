@@ -9,7 +9,6 @@ public class Player {
 
     void Start()
     {
-        currentNode = 01;
     }
 
     //Model for the player. Add stuff as you need it :)

@@ -2,58 +2,59 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Node09 : MonoBehaviour
+public class Node09 : Node
 {
-
-    public static bool locked;
-    private GameObject nodeLock;
-    private GameObject node;
+    private int thisNode = 9;
+    private bool thisLock;
+    private int thisLevel = 2;
 
     // Use this for initialization
     void Start()
     {
-        nodeLock = GameObject.FindGameObjectWithTag("Lock09");
-        node = GameObject.FindGameObjectWithTag("Node09");
+        nodeRen = "Node" + thisNode.ToString();
+        lockRen = "Lock" + thisNode.ToString();
 
-        node.GetComponent<Renderer>().material.color = Color.black;
-        nodeLock.GetComponent<Renderer>().material.color = Color.white;
-        locked = true;
+        if (!Locks.ContainsKey(thisNode))
+        {
+            Locks.Add(thisNode, true);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (PlayerUI.currentNode == 09 && PlayerUI.open)
-        {
-            locked = false;
-        }
+        thisLock = Locks[thisNode];
 
-        if (locked == false)
+        nodeLock = GameObject.FindGameObjectWithTag(lockRen);
+        node = GameObject.FindGameObjectWithTag(nodeRen);
+
+        if (thisLock == false)
         {
             nodeLock.GetComponent<Renderer>().material.color = Color.cyan;
         }
-
-        if (PlayerUI.currentNode == 09)
-        {
-            node.GetComponent<Renderer>().material.color = PlayerUI.color;
-        }
         else
+        {
+            nodeLock.GetComponent<Renderer>().material.color = Color.white;
+        }
+
+        if (currentNode != thisNode)
         {
             node.GetComponent<Renderer>().material.color = Color.black;
         }
-
-
-
-
     }
+
 
     private void OnMouseDown()
     {
-        // if (!locked || (PlayerUI.currentNode == 04 && !Node04.locked) || (PlayerUI.currentNode == 05 && !Node05.locked) || (PlayerUI.currentNode == 08 && !Node08.locked) || (PlayerUI.currentNode == 13 && !Node13.locked) || (PlayerUI.currentNode == 15 && !Node15.locked))
-        if (!locked || !Node04.locked || !Node05.locked || !Node08.locked || !Node13.locked || !Node15.locked)
+        if (!thisLock || (currentNode == 4 && !Locks[4]) || (currentNode == 5 && !Locks[5]) || (currentNode == 8 && !Locks[8]) || (currentNode == 13 && !Locks[13]) || (currentNode == 15 && !Locks[15]))
         {
-            PlayerUI.currentNode = 09;
-            PlayerUI.open = false;
+            currentNode = thisNode;
         }
+    }
+
+    public void OnMouseOver()
+    {
+        currentModule = thisNode;
+        currentLevel = thisLevel;
     }
 }
