@@ -1,0 +1,3 @@
+Calling the decrypt(Int lvl) function will add a Decrypt module to your inventory.
+The level of the module is decided by the Integer you provide the constructor.
+decrypt(1); will add a lvl 1 Decrypt module

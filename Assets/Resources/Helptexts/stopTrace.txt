@@ -1,0 +1,4 @@
+Calling the stopTrace(Int lvl) function will add a Stoptrace module to your inventory.
+The level of the module is decided by the Integer you provide the constructor.
+stopTrace(1); will add a lvl 1 Stoptrace module
+This module will kill any goverment trace currently active if the tracer has the same lvl as your module or lower.
