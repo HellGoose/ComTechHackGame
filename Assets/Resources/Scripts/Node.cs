@@ -11,6 +11,7 @@ public class Node : MonoBehaviour {
     public string lockRen;
     public static int currentNode;
     public static int currentLevel;
+    public static int currentModule;
     public static Dictionary<int, bool> Locks = new Dictionary<int, bool>();
 
 

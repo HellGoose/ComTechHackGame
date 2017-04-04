@@ -7,6 +7,7 @@ public class Node22 : Node
 
     private int thisNode = 22;
     private bool thisLock;
+    private int thisLevel = 2;
 
     // Use this for initialization
     void Start()
@@ -50,5 +51,11 @@ public class Node22 : Node
         {
             currentNode = thisNode;
         }
+    }
+
+    public void OnMouseOver()
+    {
+        currentModule = thisNode;
+        currentLevel = thisLevel;
     }
 }

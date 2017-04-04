@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class UIController : MonoBehaviour {
 
-    private int currentLock;
-
     // Use this for initialization
     void Start () {
 
@@ -14,7 +12,6 @@ public class UIController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        currentLock = Node.currentNode;
     }
 
     public void Unlock()

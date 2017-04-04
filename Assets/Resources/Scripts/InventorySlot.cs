@@ -5,13 +5,12 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class InventorySlot : MonoBehaviour, IPointerClickHandler {
+public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler {
     private Text moduleName;
     private Text moduleLevel;
     private Module module;
     public static Inventory inventory;
-    private int lastLevel;
-    private int lastNode;
+    private Vector3 startPostition;
 
     // Use this for initialization
     void Start () {
@@ -26,29 +25,41 @@ public class InventorySlot : MonoBehaviour, IPointerClickHandler {
 
     }
 
-    public void OnPointerClick(PointerEventData eventData)
+    public void OnBeginDrag(PointerEventData eventData)
     {
+        startPostition = transform.position;
+    }
+
+    public void OnDrag(PointerEventData eventData)
+    {
+        transform.position = Input.mousePosition;
+    }
+
+
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        transform.position = startPostition;
         useItem();
     }
 
+    
+
     private void useItem()
     {
-        if ((Node.Locks[Node.currentNode]) && (moduleName.text.Equals("decrypt()")))
+        if ((Node.Locks[Node.currentModule]) && (moduleName.text.Equals("decrypt()")))
         {
             if (Node.currentLevel.ToString().Equals(moduleLevel.text))
             {
-                lastNode = Node.currentNode;
-                lastLevel = Node.currentLevel;
-                Node.Locks[Node.currentNode] = false;
+                Node.Locks[Node.currentModule] = false;
                 inventory.removeItem(module);
             }
 
         }
-        else if (!Node.Locks[lastNode] && moduleName.text.Equals("encrypt()"))
+        else if (!Node.Locks[Node.currentModule] && moduleName.text.Equals("encrypt()"))
         {
-            if (lastLevel.ToString().Equals(moduleLevel.text))
+            if (Node.currentLevel.ToString().Equals(moduleLevel.text))
             {
-                Node.Locks[lastNode] = true;
+                Node.Locks[Node.currentModule] = true;
                 inventory.removeItem(module);
             }
         }

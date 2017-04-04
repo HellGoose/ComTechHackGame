@@ -49,7 +49,12 @@ public class Node08 : Node
         if (!thisLock || (currentNode == 2 && !Locks[2]) || (currentNode == 4 && !Locks[4]) || (currentNode == 9 && !Locks[9]) || (currentNode == 12 && !Locks[12]) || (currentNode == 13 && !Locks[13]))
         {
             currentNode = thisNode;
-            currentLevel = thisLevel;
         }
+    }
+
+    public void OnMouseOver()
+    {
+        currentModule = thisNode;
+        currentLevel = thisLevel;
     }
 }
