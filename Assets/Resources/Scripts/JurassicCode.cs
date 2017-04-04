@@ -34,9 +34,11 @@ public class JurassicCode : MonoBehaviour {
         engine = new ScriptEngine();
         engine.EnableExposedClrTypes = true;
         engine.SetGlobalFunction("consoleLog", new System.Action<System.Object>(consoleLog));
-        engine.SetGlobalFunction("helpUsObi1", new System.Action(help));
+        engine.SetGlobalFunction("help", new System.Action(help));
         engine.SetGlobalFunction("decrypt", new System.Action<int>(addDecrypt));
         engine.SetGlobalFunction("encrypt", new System.Action<int>(addEncrypt));
+        engine.SetGlobalFunction("stopTrace", new System.Action<int>(addStopTrace));
+        engine.SetGlobalFunction("proxy", new System.Action<int>(addProxy));
     }
    
     public void help()
@@ -104,6 +106,16 @@ public class JurassicCode : MonoBehaviour {
     {
 
         inventory.addItem(new Encrypt(lvl));
+    }
+    public void addStopTrace(int lvl)
+    {
+
+        inventory.addItem(new stopTrace(lvl));
+    }
+    public void addProxy(int lvl)
+    {
+
+        inventory.addItem(new Proxy(lvl));
     }
 }
 

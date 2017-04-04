@@ -1,0 +1,4 @@
+Calling the proxy(Int lvl) function will add a Proxy module to your inventory.
+The level of the module is decided by the Integer you provide the constructor.
+proxy(1); will add a lvl 1 Proxy module
+This module will divert any goverment trace currently active,the number of nodes the trace will be moved is dependent on the lvl of the module.

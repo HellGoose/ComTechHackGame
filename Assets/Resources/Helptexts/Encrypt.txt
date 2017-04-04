@@ -1,0 +1,3 @@
+Calling the encrypt(Int lvl) function will add a Encrypt module to your inventory.
+The level of the module is decided by the Integer you provide the constructor.
+encrypt(1); will add a lvl 1 Encrypt module
