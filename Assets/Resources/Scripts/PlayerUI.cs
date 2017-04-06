@@ -16,8 +16,6 @@ public class PlayerUI : MonoBehaviour {
     // Use this for initialization
     void Start () {
 
-        player = 1;
-
         if (player == 1)
         {
             Node.currentNode = 1;
@@ -25,7 +23,7 @@ public class PlayerUI : MonoBehaviour {
         }
         else if (player == 2)
         {
-            Node.currentNode = 0;
+            Node.currentNode = 5;
             color = Color.blue;
         }
         else if (player == 3)
