@@ -21,7 +21,7 @@ public class JurassicCode : MonoBehaviour {
     private Inventory inventory;
     // Use this for initialization
     void Start () {
-        inventory = GameObject.Find("CodeWriter/Canvas/inventory").GetComponent<Inventory>();
+       // inventory = GameObject.Find("CodeWriter/Canvas/inventory").GetComponent<Inventory>();
     }
 	
 	// Update is called once per frame
