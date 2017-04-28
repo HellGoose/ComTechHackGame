@@ -39,6 +39,9 @@ public class JurassicCode : MonoBehaviour {
         engine.SetGlobalFunction("encrypt", new System.Action<int>(addEncrypt));
         engine.SetGlobalFunction("stopTrace", new System.Action<int>(addStopTrace));
         engine.SetGlobalFunction("proxy", new System.Action<int>(addProxy));
+        engine.SetGlobalFunction("node1", new System.Action<System.Object>(node1));
+        engine.SetGlobalFunction("node2", new System.Action<System.Object>(node2));
+        engine.SetGlobalFunction("node3", new System.Action<System.Object>(node3));
     }
    
     public void help()
@@ -116,6 +119,40 @@ public class JurassicCode : MonoBehaviour {
     {
 
         inventory.addItem(new Proxy(lvl));
+    }
+    public void node1(System.Object obj)
+    {
+        if (obj != null && obj is string &&(string)obj!="")
+        {
+            consoleLog("Task Successfully completed");
+            consoleLog("Welcome to HAC-Man : " + obj);
+        }else { 
+        consoleLog("Task Failed try again.");
+        }
+    }
+    public void node2(System.Object obj)
+    {
+        if (obj != null&& Convert.ToInt32(obj)==12)
+        {
+            consoleLog("Task Successfully completed");
+        }
+        else
+        {
+            consoleLog("Task Failed try again.");
+            consoleLog("The number you submitted was : "+obj);
+        }
+      
+
+    }
+    public void node3(System.Object obj)
+    {
+        if ((bool)obj == true)
+        {
+            consoleLog("Task Successfully completed");
+        }else
+        {
+            consoleLog("Task Failed try again.");
+        }
     }
 }
 
